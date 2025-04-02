@@ -4,4 +4,7 @@ El objetivo de esta bitácora es realizar anotaciones, incluir links, descripcio
 grado, de forma que lo tenga aquí recogido para poder redactar de forma más sencilla la memoria del trabajo una vez finalizado este y tenerlo a mano durante su realización para poder consultar los recursos necesarios.
 
 
+# APLICACIONES UTILIZADAS EN EL PROYECTO
 
+1. Google Colab
+   He clonado el repositorio y voy a realizar aquí la programación pertinente del trabajo, organizándola en forma de Notebooks. 
