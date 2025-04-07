@@ -8,3 +8,13 @@ grado, de forma que lo tenga aquí recogido para poder redactar de forma más se
 
 1. Google Colab
    He clonado el repositorio y voy a realizar aquí la programación pertinente del trabajo, organizándola en forma de Notebooks. 
+
+
+
+# MODELOS REDES
+
+Modelo TensorFlow:
+Este utiliza tres capas de neuronas para su funcionamiento:
+1. Flatten
+2. Dense
+3. Dropout
