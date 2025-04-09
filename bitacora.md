@@ -18,3 +18,8 @@ Este utiliza tres capas de neuronas para su funcionamiento:
 1. Flatten
 2. Dense
 3. Dropout
+
+
+# BIBLIOGRAFÍA UTILIZADA 
+
+## Bibliografía sobre redes GAN y modelos de aprendizaje automático
