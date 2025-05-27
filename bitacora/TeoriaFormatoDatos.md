@@ -60,11 +60,3 @@ print(data.keys())  # para ver qué contiene
 
 
 
-
-
-Tú dijiste:
-si quiero cargar la totalidad del dataset que tengo en physionet en python como puedo hacerlo 
-
-
-ChatGPT Plus
-Perfecto, para cargar todo el dataset de Challenge 2017 desde PhysioNet en Python, lo ideal es usar la librería oficial wfdb, que está diseñada para trabajar con esos archivos .hea, .dat, y a veces .mat.
