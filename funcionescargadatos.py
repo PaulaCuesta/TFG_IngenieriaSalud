@@ -9,9 +9,7 @@ Original file is located at
 #**Funciones de descarga de las señales desde PhysioNet y de carga en el entorno de trabajo**
 """
 
-
-
-"""Importación de las librerías necesarias para las funciones"""
+# Importación de las bibliotecas necesarias
 
 import os
 import wfdb
@@ -118,6 +116,10 @@ def carga_archivos_entorno (ruta_directorio, archivos=None):
 
   return ecg_cargados                                                        # Devuelve el diccionario con los archivos wfdb.Record que han sido creados
 
+
+
+"""## Función que lleva a cabo el proceso interno de carga de los datos"""
+
 def proceso_interno_carga (ruta_directorio, nombre_archivo):
 
   """
@@ -155,3 +157,4 @@ def proceso_interno_carga (ruta_directorio, nombre_archivo):
   except Exception as e:                                                          # Si la carga no ha sido satisfactoria, muestra un mensaje de error por pantalla
     raise ValueError(f"Error al cargar el archivo {nombre_archivo}: {e}. Inténtalo de nuevo.")
     return nombre_archivo, None                                                   # Devolución del nombre del archivo que no ha sido posible cargar, y de un objeto vacío
+
