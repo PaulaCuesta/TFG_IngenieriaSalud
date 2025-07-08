@@ -72,7 +72,7 @@ def obtener_señal_ecg (record):
 
 """## Función que realiza el filtrado de la señal dentro de un rango de frecuencias"""
 
-def filtro_pasa_banda (record, lim_inf=0.5, lim_sup=40, orden=4):
+def filtro_pasa_banda (record, frec_muestreo = 300, lim_inf=0.5, lim_sup=40, orden=4):
 
   """
   La función aplica un filtro pasa banda de tipo Butterworth a la señal, para quedarse con las frecuencias deseadas, evitando así que el ruido u otros sonidos corporales puedan
@@ -81,6 +81,7 @@ def filtro_pasa_banda (record, lim_inf=0.5, lim_sup=40, orden=4):
   Parámetros
   ------------
     - record (wfdb.Record): Objeto de tipo Record de uno de los registros de nuestro dataset, el cual contiene la señal a filtrar y la frecuencia de muestreo en el método '.fs'
+    - frec_muestreo (float, optional): Frecuencia de muestreo de la señal de ECG. Si no indicamos nada, es 300 Hz por defecto
     - lim_inf (float, optional): Frecuencia de corte inferior de la señal ECG. Si no indicamos nada, es 0.5 Hz por defecto
     - lim_sup (float, optional): Frecuencia de corte alta de la señal de ECG del objeto wfdb.Record. Tiene un valor por defecto de 40 Hz.
     - orden (int, optional): Indica el orden del filtro de Butterworth. Es 4 por defecto, a no ser que indiquemos otro valor para dicho filtro.
@@ -94,16 +95,19 @@ def filtro_pasa_banda (record, lim_inf=0.5, lim_sup=40, orden=4):
 
   Raises
   ----------
+    - ValueError: Imprime un mensaje de error cuando la frecuencia inferior es la más grande de las dos
     - ValueError: Mensaje de error que indica que los límites de filtrado no se encuentran dentro del rango válido para la frecuencia de Nyquist.
 
 
   """
 
 
-  frec_ecg = record.fs                                           # Obtiene la frecuencia de muestreo a la que se ha grabado la señal de ECG
+  frec_ecg = frec_muestreo                                       # Obtiene la frecuencia de muestreo a la que se ha grabado la señal de ECG
   señal_ecg_1d = obtener_señal_ecg(record)                       # Consigue el array de NumPy que contine la señal del objeto 'record' aplanada
   frec_nyquist = 0.5 * frec_ecg                                  # Calcula la frecuencia de Nyquist, lo cual es vital para evitar el proceso de 'aliasing'
 
+  if not (lim_inf < lim_sup):                                    # Muestra un mensaje de eror por pantalla en el caso de que el límite inferior sea más grande que el superior
+    raise ValueError("El límite inferior del filtro (lim_inf) debe ser estrictamente menor que el límite superior (lim_sup).")
   if lim_inf > 0 and lim_sup < frec_nyquist:                     # Comprueba si los límites (inferior y superior) cumplen con la frecuencia de Nyquist, para que el filtrado sea útil
     lim_inf_normal = lim_inf / frec_nyquist                      # Normaliza la frecuencia del límite inferior con respecto a la frecuencia de Nyquist, para poder aplicar el filtro
     lim_sup_normal = lim_sup / frec_nyquist                      # Normaliza la frecuencia del límite superior con respecto a la frecuencia de Nyquist, necesario para la función 'butter'
@@ -424,7 +428,7 @@ def procesar_multiples_registros (diccionario_registros, exp=7, fs = 300, dis_mi
 
 
     except Exception as e:                                              # Muestra un mensaje de error por pantalla indccando que no se ha podido procesar el registro individaul
-      raise ValueError (f"Se ha obtenido un error procesando el record {nombre}. Inténtalo de nuevo.")
+      print (f"Se ha obtenido un error procesando el record {nombre}. Inténtalo de nuevo.")
 
   return segmentos_diccionario                                          # Devuelve la lista en que se encuentran almacenados los segmentos en que se han dividido las señales del diccionario
 
